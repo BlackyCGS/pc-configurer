@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements UserDetails {
 
   @Id
@@ -28,6 +28,10 @@ public class User implements UserDetails {
 
   @Column(unique = true, nullable = false)
   private String email;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true,
+          fetch = FetchType.LAZY)
+  private List<PcConfiguration> pcConfigurations;
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)

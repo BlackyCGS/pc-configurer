@@ -9,6 +9,7 @@ import by.pcconf.pcconfigurer.exception.NotFoundCustomException;
 import by.pcconf.pcconfigurer.mapper.UserMapper;
 import by.pcconf.pcconfigurer.repository.UserRepository;
 import by.pcconf.pcconfigurer.service.UserService;
+import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public int getIdByUsername(String username) {
+  public Integer getIdByUsername(String username) {
     User user = userRepository.findByUsername(username).orElseThrow(
             () -> new NotFoundCustomException(NOT_FOUND_MESSAGE)
     );
@@ -78,5 +79,21 @@ public class UserServiceImpl implements UserService {
     user.setPermission(permission);
     return userMapper.toDto(userRepository.save(user));
   }
+
+  @Override
+  public String getEmailByUsername(String username) {
+    User user = userRepository.findByUsername(username).orElseThrow(
+            () -> new NotFoundCustomException(NOT_FOUND_MESSAGE)
+    );
+    return user.getEmail();
+  }
+
+  @Override
+  public User getUserByName(String name) {
+    return userRepository.findByUsername(name).orElseThrow(
+            () -> new NotFoundCustomException(NOT_FOUND_MESSAGE)
+    );
+  }
+
 
 }

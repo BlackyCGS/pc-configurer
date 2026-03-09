@@ -4,6 +4,7 @@ import by.pcconf.pcconfigurer.dto.UserDto;
 import by.pcconf.pcconfigurer.dto.UserRequest;
 import by.pcconf.pcconfigurer.entity.User;
 import by.pcconf.pcconfigurer.entity.UserPermission;
+import jakarta.servlet.http.Cookie;
 
 public interface UserService {
 
@@ -13,8 +14,11 @@ public interface UserService {
 
   void deleteUser(UserRequest user);
 
-  int getIdByUsername(String username);
+  Integer getIdByUsername(String username);
 
   UserDto updateUserRole(Integer id, UserPermission permission);
 
+  String getEmailByUsername(String username);
+
+  User getUserByName(String name);
 }

@@ -10,6 +10,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -179,5 +180,18 @@ public class JwtServiceImpl implements JwtService {
   @Transactional
   public void revokeUser(int id) {
     refreshTokenRepository.deleteAllByUserId(id);
+  }
+
+  @Override
+  public String extractTokenFromCookies(Cookie[] cookies) {
+    String token = null;
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        if ("jwt".equals(cookie.getName())) {
+          token = cookie.getValue();
+        }
+      }
+    }
+    return token;
   }
 }

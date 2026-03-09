@@ -1,6 +1,7 @@
 package by.pcconf.pcconfigurer.service;
 
 import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.Cookie;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface JwtService {
   boolean isTokenExpired(String token);
 
   void revokeUser(int id);
+
+  String extractTokenFromCookies(Cookie[] cookies);
 }
