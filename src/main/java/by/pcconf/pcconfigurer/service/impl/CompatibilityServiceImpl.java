@@ -64,7 +64,7 @@ public class CompatibilityServiceImpl implements CompatibilityService {
                                  @NonNull Integer motherboardId) {
     Ram ram = externalApiService.getRam(ramId);
     Motherboard motherboard = externalApiService.getMotherboard(motherboardId);
-    String ramType = ram.getRamType().substring(0, 3);
+    String ramType = ram.getRamType().substring(0, 4);
     return ramType.equals(motherboard.getMemoryType()) && ramAmount.equals(motherboard.getRamSlots());
   }
 
