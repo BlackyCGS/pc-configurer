@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
   private final PasswordEncoder passwordEncoder;
   private static final String NOT_FOUND_MESSAGE = "User not found";
 
-  @Autowired
   public UserServiceImpl(UserRepository userRepository, UserMapper userMapper,
                          PasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;

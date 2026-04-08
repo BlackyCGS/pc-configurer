@@ -4,6 +4,7 @@ import by.pcconf.pcconfigurer.entity.ComponentType;
 import by.pcconf.pcconfigurer.entity.PcConfiguration;
 import by.pcconf.pcconfigurer.exception.*;
 import by.pcconf.pcconfigurer.repository.PcConfigurationRepository;
+import by.pcconf.pcconfigurer.service.CompatibilityService;
 import by.pcconf.pcconfigurer.service.ExternalApiService;
 import by.pcconf.pcconfigurer.service.PcConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,15 @@ import java.util.List;
 @Service
 public class PcConfigurationServiceImpl implements PcConfigurationService {
   private final ExternalApiService externalApiService;
-  PcConfigurationRepository configurationRepository;
+  private final PcConfigurationRepository configurationRepository;
+  private final CompatibilityService compatibilityService;
 
-  @Autowired
   public PcConfigurationServiceImpl(ExternalApiService externalApiService,
-                                    PcConfigurationRepository configurationRepository) {
+                                    PcConfigurationRepository configurationRepository,
+                                    CompatibilityService compatibilityService) {
     this.externalApiService = externalApiService;
     this.configurationRepository = configurationRepository;
+    this.compatibilityService = compatibilityService;
   }
 
 
@@ -70,6 +73,9 @@ public class PcConfigurationServiceImpl implements PcConfigurationService {
     }
     if (config.getRamId() != null && externalApiService.getComponentType(config.getRamId()) != ComponentType.RAM) {
       throw new BadRequestCustomException("Invalid component type");
+    }
+    if (!compatibilityService.isCompatible(config)) {
+      throw new BadRequestCustomException("Components are not compatible");
     }
     return configurationRepository.save(config);
   }

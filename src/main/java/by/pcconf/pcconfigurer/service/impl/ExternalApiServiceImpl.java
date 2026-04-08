@@ -7,10 +7,12 @@ import by.pcconf.pcconfigurer.exception.ExternalApiUnauthorizedException;
 import by.pcconf.pcconfigurer.exception.NotFoundCustomException;
 import by.pcconf.pcconfigurer.mapper.*;
 import by.pcconf.pcconfigurer.mapper.impl.RecordMapperImpl;
+import by.pcconf.pcconfigurer.scheduler.ProductCacheEvict;
 import by.pcconf.pcconfigurer.service.ExternalApiService;
 import lombok.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.MediaType;
@@ -24,6 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ExternalApiServiceImpl implements ExternalApiService {
   private final RestClient restClient;
   private final CpuMapper cpuMapper;
@@ -40,7 +43,6 @@ public class ExternalApiServiceImpl implements ExternalApiService {
   private static final String PRODUCTS_URI = "/api/products/category/";
   private static final String SINGLE_PRODUCT_URI = "/api/products/";
 
-  @Autowired
   public ExternalApiServiceImpl(RestClient.Builder builder,
                                 CpuMapper cpuMapper,
                                 GpuMapper gpuMapper,
@@ -185,6 +187,7 @@ public class ExternalApiServiceImpl implements ExternalApiService {
   }
 
   @Override
+  @Cacheable("products")
   public Cpu getCpu(@NonNull Integer id) {
     if (getComponentType(id) != ComponentType.CPU) {
       throw new BadRequestCustomException("Cpu is not a cpu");
@@ -210,6 +213,7 @@ public class ExternalApiServiceImpl implements ExternalApiService {
   }
 
   @Override
+  @Cacheable("products")
   public Gpu getGpu(@NonNull Integer id) {
     if (getComponentType(id) != ComponentType.GPU) {
       throw new BadRequestCustomException("Gpu is not a gpu");
@@ -235,6 +239,7 @@ public class ExternalApiServiceImpl implements ExternalApiService {
   }
 
   @Override
+  @Cacheable("products")
   public Motherboard getMotherboard(@NonNull Integer id) {
     if (getComponentType(id) != ComponentType.MOTHERBOARD) {
       throw new BadRequestCustomException("Motherboard is not a motherboard");
@@ -260,6 +265,7 @@ public class ExternalApiServiceImpl implements ExternalApiService {
   }
 
   @Override
+  @Cacheable("products")
   public PcCase getPcCase(@NonNull Integer id) {
     if (getComponentType(id) != ComponentType.PC_CASE) {
       throw new BadRequestCustomException("Pc case is not a pc case");
@@ -285,6 +291,7 @@ public class ExternalApiServiceImpl implements ExternalApiService {
   }
 
   @Override
+  @Cacheable("products")
   public Psu getPsu(@NonNull Integer id) {
     if (getComponentType(id) != ComponentType.PSU) {
       throw new BadRequestCustomException("Psu is not a psu");
@@ -310,6 +317,7 @@ public class ExternalApiServiceImpl implements ExternalApiService {
   }
 
   @Override
+  @Cacheable("products")
   public Ram getRam(@NonNull Integer id) {
     if (getComponentType(id) != ComponentType.RAM) {
       throw new BadRequestCustomException("Ram is not a ram");
@@ -320,6 +328,5 @@ public class ExternalApiServiceImpl implements ExternalApiService {
     }
     return ramMapper.toEntity(response);
   }
-
 
 }

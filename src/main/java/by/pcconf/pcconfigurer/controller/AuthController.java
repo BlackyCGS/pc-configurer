@@ -31,7 +31,6 @@ public class AuthController {
   @Value("${security.jwt.refresh.expiration-time}")
   private long refreshExpirationTime;
 
-  @Autowired
   public AuthController(AuthService authService, JwtService jwtService) {
     this.authService = authService;
     this.jwtService = jwtService;
