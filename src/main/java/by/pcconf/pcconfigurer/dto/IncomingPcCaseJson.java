@@ -1,5 +1,7 @@
 package by.pcconf.pcconfigurer.dto;
 
+import lombok.NoArgsConstructor;
+
 public record IncomingPcCaseJson(
         Integer id,
         String name,
