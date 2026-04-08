@@ -23,7 +23,6 @@ public class AuthServiceImpl implements AuthService {
   private final UserMapper userMapper;
   private final UserService userService;
 
-  @Autowired
   public AuthServiceImpl(UserRepository userRepository,
                          PasswordEncoder passwordEncoder,
                          AuthenticationManager authenticationManager,

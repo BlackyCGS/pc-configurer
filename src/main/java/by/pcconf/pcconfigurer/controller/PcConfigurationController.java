@@ -37,7 +37,6 @@ public class PcConfigurationController {
   @Value("${REDIRECT_PORT:80}")
   private Integer redirectPort;
 
-  @Autowired
   public PcConfigurationController(PcConfigurationService pcConfigurationService,
                                    ExternalApiService externalApiService,
                                    JwtService jwtService,

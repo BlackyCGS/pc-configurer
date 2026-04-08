@@ -37,7 +37,6 @@ public class JwtServiceImpl implements JwtService {
   CustomUserDetailsService userDetailsService;
   UserService userService;
 
-  @Autowired
   public JwtServiceImpl(RefreshTokenRepository refreshTokenRepository,
                     CustomUserDetailsService userDetailsService,
                     UserService userService) {

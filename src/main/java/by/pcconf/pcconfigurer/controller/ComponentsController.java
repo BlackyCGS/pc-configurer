@@ -13,7 +13,6 @@ import java.util.List;
 public class ComponentsController {
   private final ExternalApiService externalApiService;
 
-  @Autowired
   public ComponentsController(ExternalApiService externalApiService) {
     this.externalApiService = externalApiService;
   }
