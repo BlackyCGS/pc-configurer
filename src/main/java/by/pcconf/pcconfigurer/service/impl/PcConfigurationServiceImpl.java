@@ -62,7 +62,7 @@ public class PcConfigurationServiceImpl implements PcConfigurationService {
     if (config.getCpuId() != null && externalApiService.getComponentType(config.getCpuId()) != ComponentType.CPU) {
       throw new BadRequestCustomException("Invalid component type");
     }
-    if (config.getPcCaseId() != null && externalApiService.getComponentType(config.getPcCaseId()) != ComponentType.PC_CASE) {
+    if (config.getPcCaseId() != null && externalApiService.getComponentType(config.getPcCaseId()) != ComponentType.PC_ASE) {
       throw new BadRequestCustomException("Invalid component type");
     }
     if (config.getPsuId() != null && externalApiService.getComponentType(config.getPsuId()) != ComponentType.PSU) {

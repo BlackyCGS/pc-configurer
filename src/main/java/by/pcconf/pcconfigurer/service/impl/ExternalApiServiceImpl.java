@@ -267,7 +267,7 @@ public class ExternalApiServiceImpl implements ExternalApiService {
   @Override
   @Cacheable("products")
   public PcCase getPcCase(@NonNull Integer id) {
-    if (getComponentType(id) != ComponentType.PC_CASE) {
+    if (getComponentType(id) != ComponentType.PC_ASE) {
       throw new BadRequestCustomException("Pc case is not a pc case");
     }
     IncomingPcCaseJson response = getSingleRecordById(id, IncomingPcCaseJson.class);

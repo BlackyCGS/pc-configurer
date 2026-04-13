@@ -8,6 +8,8 @@ import HomePage from "./pages/HomePage";
 
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import CartPage from "./pages/CartPage";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export default function App() {
     const [mode, setMode] = useState("light");
@@ -25,11 +27,19 @@ export default function App() {
                     <IconButton onClick={toggleTheme} color="inherit">
                         {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
                     </IconButton>
+                    <IconButton
+                        onClick={() => window.location.href = '/cart'}
+                        color="inherit"
+                        title="Корзина"
+                    >
+                        <ShoppingCartIcon />
+                    </IconButton>
                 </Box>
 
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/auth" element={<LoginPage />} />
+                    <Route path="/cart" element={<CartPage />} />
+                    <Route path="/configurator" element={<HomePage />} />
+                    <Route path="/" element={<LoginPage />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

@@ -27,6 +27,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/configuration")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class PcConfigurationController {
   private final PcConfigurationService pcConfigurationService;
   private final ExternalApiService externalApiService;

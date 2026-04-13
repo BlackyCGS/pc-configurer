@@ -5,15 +5,24 @@ import { TextField, Button, Box } from "@mui/material";
 export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await signup({ email, password });
+        await signup({ username, email, password });
         alert("Регистрация успешна");
     };
 
     return (
         <Box component="form" onSubmit={handleSubmit}>
+            <TextField
+                fullWidth
+                label="Login"
+                margin="normal"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+            />
+
             <TextField
                 fullWidth
                 label="Email"

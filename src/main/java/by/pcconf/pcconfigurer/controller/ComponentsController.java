@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/components")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class ComponentsController {
   private final ExternalApiService externalApiService;
 
@@ -36,7 +37,7 @@ public class ComponentsController {
             maxThreads, minTdp, maxTdp, socket, pageNumber, pageSize
     );
     List<Cpu> cpus = externalApiService.getCpus(filter);
-    Long totalItems = externalApiService.getRecordsAmount(filter, "ram");
+    Long totalItems = externalApiService.getRecordsAmount(filter, "cpu");
     Double totalPages = Math.ceil((double) totalItems /pageSize);
     return new PagedResponse<>(
             cpus, totalItems, pageNumber, pageSize, totalPages
@@ -68,7 +69,7 @@ public class ComponentsController {
             minVram, maxVram, minTdp, maxTdp, pageNumber, pageSize
     );
     List<Gpu> gpus = externalApiService.getGpus(filter);
-    Long totalItems = externalApiService.getRecordsAmount(filter, "ram");
+    Long totalItems = externalApiService.getRecordsAmount(filter, "gpu");
     Double totalPages = Math.ceil((double) totalItems /pageSize);
     return new PagedResponse<>(
             gpus, totalItems, pageNumber, pageSize, totalPages
@@ -122,7 +123,7 @@ public class ComponentsController {
             pageNumber, pageSize
     );
     List<PcCase> pcCases = externalApiService.getPcCases(filter);
-    Long totalItems = externalApiService.getRecordsAmount(filter, "ram");
+    Long totalItems = externalApiService.getRecordsAmount(filter, "pcCase");
     Double totalPages = Math.ceil((double) totalItems /pageSize);
     return new PagedResponse<>(
             pcCases, totalItems, pageNumber, pageSize, totalPages
@@ -150,7 +151,7 @@ public class ComponentsController {
             efficiencyRating, pageNumber, pageSize
     );
     List<Psu> psuList = externalApiService.getPsus(filter);
-    Long totalItems = externalApiService.getRecordsAmount(filter, "ram");
+    Long totalItems = externalApiService.getRecordsAmount(filter, "psu");
     Double totalPages = Math.ceil((double) totalItems /pageSize);
     return new PagedResponse<>(
             psuList, totalItems, pageNumber, pageSize, totalPages
