@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "pc_configuration")
 @Data
 @NoArgsConstructor
-public class PcConfiguration {
+public class   PcConfiguration {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   Integer id;
